@@ -391,12 +391,6 @@ parameters:
 			path: src/Mpdf.php
 
 		-
-			message: '#^Variable \$bb might not be defined\.$#'
-			identifier: variable.undefined
-			count: 1
-			path: src/Mpdf.php
-
-		-
 			message: '#^Variable \$bbox_bb might not be defined\.$#'
 			identifier: variable.undefined
 			count: 2
@@ -619,12 +613,6 @@ parameters:
 			path: src/Mpdf.php
 
 		-
-			message: '#^Variable \$leveladj might not be defined\.$#'
-			identifier: variable.undefined
-			count: 4
-			path: src/Mpdf.php
-
-		-
 			message: '#^Variable \$llm might not be defined\.$#'
 			identifier: variable.undefined
 			count: 2
@@ -763,12 +751,6 @@ parameters:
 			path: src/Mpdf.php
 
 		-
-			message: '#^Variable \$t might not be defined\.$#'
-			identifier: variable.undefined
-			count: 1
-			path: src/Mpdf.php
-
-		-
 			message: '#^Variable \$texto might not be defined\.$#'
 			identifier: variable.undefined
 			count: 9
@@ -868,24 +850,6 @@ parameters:
 			message: '#^Array has 2 duplicate keys with value ''rphf'' \(''rphf'', ''rphf''\)\.$#'
 			identifier: array.duplicateKey
 			count: 1
-			path: src/Otl.php
-
-		-
-			message: '#^Offset int on array\{\} in isset\(\) does not exist\.$#'
-			identifier: isset.offset
-			count: 1
-			path: src/Otl.php
-
-		-
-			message: '#^Offset int\<0, max\> on array\{\} in isset\(\) does not exist\.$#'
-			identifier: isset.offset
-			count: 1
-			path: src/Otl.php
-
-		-
-			message: '#^Offset int\<1, max\> on array\{\} in isset\(\) does not exist\.$#'
-			identifier: isset.offset
-			count: 2
 			path: src/Otl.php
 
 		-
@@ -1360,24 +1324,6 @@ parameters:
 			message: '#^PHPDoc tag @throws has invalid value \(\\Kdyby\\StrictObjects\\\\Mpdf\\MpdfException\)\: Unexpected token "\\\\\\\\Mpdf\\\\MpdfException", expected TOKEN_HORIZONTAL_WS at offset 74 on line 3$#'
 			identifier: phpDoc.parseError
 			count: 2
-			path: src/Writer/FontWriter.php
-
-		-
-			message: '#^Variable \$codeToGlyph might not be defined\.$#'
-			identifier: variable.undefined
-			count: 1
-			path: src/Writer/FontWriter.php
-
-		-
-			message: '#^Variable \$fontstream might not be defined\.$#'
-			identifier: variable.undefined
-			count: 2
-			path: src/Writer/FontWriter.php
-
-		-
-			message: '#^Variable \$ttfontsize might not be defined\.$#'
-			identifier: variable.undefined
-			count: 1
 			path: src/Writer/FontWriter.php
 
 		-
