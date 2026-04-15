@@ -1,3 +1,4 @@
+autoload.php usr/share/php/mpdf/
 src usr/share/php/mpdf/
 data usr/share/php/mpdf/
 ttfonts usr/share/php/mpdf/
