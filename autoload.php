@@ -7,6 +7,10 @@
  * with mpdf-only package data.
  */
 
+// Load system PSR autoloaders provided by php-psr-log and php-psr-http-message
+require_once '/usr/share/php/Psr/Log/autoload.php';
+require_once '/usr/share/php/Psr/Http/Message/autoload.php';
+
 $baseDir = '/usr/share/php/mpdf';
 
 $psr4 = [
