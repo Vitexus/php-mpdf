@@ -5,6 +5,7 @@ Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
 Build-Depends:
  debhelper-compat (= 13),
  composer,
+ php-gd
 Standards-Version: 4.7.0
 Homepage: https://mpdf.github.io
 Rules-Requires-Root: no
