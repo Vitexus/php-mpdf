@@ -1,0 +1,114 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: mPDF
+Upstream-Contact: Matěj Humpál <matej.humpal@gmail.com>
+Source: https://github.com/mpdf/mpdf
+
+Files: *
+Copyright: 2002-2011 Ian Back
+           2015-2024 Matěj Humpál and contributors
+License: GPL-2.0-only
+
+Files: ttfonts/DejaVu*.ttf
+       ttfonts/DejaVuinfo.txt
+Copyright: 2003 Bitstream Inc.
+           2006 Tavmjong Bah
+License: DejaVu
+ Fonts are (c) Bitstream (see below). DejaVu changes are in public domain.
+ Glyphs imported from Arev fonts are (c) Tavmjong Bah (see below).
+ .
+ Bitstream Vera Fonts Copyright
+ ------------------------------
+ .
+ Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved. Bitstream Vera is
+ a trademark of Bitstream, Inc.
+ .
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of the fonts accompanying this license ("Fonts") and associated
+ documentation files (the "Font Software"), to reproduce and distribute the
+ Font Software, including without limitation the rights to use, copy, merge,
+ publish, distribute, and/or sell copies of the Font Software, and to permit
+ persons to whom the Font Software is furnished to do so, subject to the
+ following conditions:
+ .
+ The above copyright notice and this permission notice shall be included in
+ all copies of one or more of the Font Software typefaces.
+ .
+ The Font Software may be modified, altered, or added to, and in particular
+ the designs of glyphs or characters in the Fonts, and the resulting Font
+ Software or any derivative works thereof, may not be sold by itself, but
+ they may be donated or transferred without charge.
+
+Files: ttfonts/FreeMono*.ttf
+       ttfonts/FreeSans*.ttf
+       ttfonts/FreeSerif*.ttf
+       ttfonts/GNUFreeFontinfo.txt
+Copyright: 2000-2010 Free Software Foundation
+License: GPL-3.0-or-later with Font-Exception
+
+Files: ttfonts/Abyssinica_SIL.ttf
+       ttfonts/LateefRegOT.ttf
+       ttfonts/Lohit-Kannada.ttf
+       ttfonts/KhmerOS.ttf
+       ttfonts/Padauk-book.ttf
+       ttfonts/TaiHeritagePro.ttf
+       ttfonts/Tharlon-Regular.ttf
+       ttfonts/SundaneseUnicode-1.0.5.ttf
+       ttfonts/DhyanaOFL.txt
+       ttfonts/KhmerOFL.txt
+       ttfonts/LohitKannadaOFL.txt
+       ttfonts/TharlonOFL.txt
+       ttfonts/Lateef*
+Copyright: SIL International and contributors
+License: OFL-1.1
+
+Files: ttfonts/TaameyDavidCLM-Medium.ttf
+       ttfonts/TaameyDavidCLM-LICENSE.txt
+Copyright: 2010 Yoram Gnat
+License: GPL-2.0-only
+
+Files: ttfonts/Garuda*.ttf
+       ttfonts/Pothana2000.ttf
+       ttfonts/ayar.ttf
+       ttfonts/ZawgyiOne.ttf
+       ttfonts/AboriginalSansREGULAR.ttf
+       ttfonts/Aegean.otf
+       ttfonts/Aegyptus.otf
+       ttfonts/Akkadian.otf
+       ttfonts/DBSILBR.ttf
+       ttfonts/Dhyana*.ttf
+       ttfonts/Eeyek-Regular.ttf
+       ttfonts/SyrCOMEdessa.otf
+       ttfonts/Uthman.otf
+       ttfonts/damase_v.2.ttf
+       ttfonts/kaputaunicode.ttf
+       ttfonts/lannaalif-v1-03.ttf
+       ttfonts/ocrb10.ttf
+       ttfonts/ocrbinfo.txt
+Copyright: Various authors (see individual font license files)
+License: various
+
+Files: debian/*
+Copyright: 2026 Vítězslav Dvořák <info@vitexsoftware.cz>
+License: GPL-2.0-only
+
+License: GPL-2.0-only
+ On Debian systems, the complete text of the GNU General Public
+ License version 2 can be found in "/usr/share/common-licenses/GPL-2".
+
+License: GPL-3.0-or-later with Font-Exception
+ On Debian systems, the complete text of the GNU General Public
+ License version 3 can be found in "/usr/share/common-licenses/GPL-3".
+ .
+ As a special exception, if you create a document which uses this font,
+ and embed this font or unaltered portions of this font into the document,
+ this font does not by itself cause the resulting document to be covered
+ by the GNU General Public License. This exception does not however
+ invalidate any other reasons why the document might be covered by the
+ GNU General Public License. If you modify this font, you may extend
+ this exception to your version of the font, but you are not obligated
+ to do so. If you do not wish to do so, delete this exception statement
+ from your version.
+
+License: OFL-1.1
+ This Font Software is licensed under the SIL Open Font License, Version 1.1.
+ This license is available with a FAQ at: http://scripts.sil.org/OFL

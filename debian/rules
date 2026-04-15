@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+
+export DH_VERBOSE = 1
+export COMPOSER_HOME = /tmp/composer-home
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	composer install --no-dev --no-interaction --optimize-autoloader
+	find vendor/ \( -name ".git" -o -name ".gitignore" -o -name ".gitattributes" \
+		-o -name ".travis.yml" -o -name ".github" \) -exec rm -rf {} +
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf vendor/

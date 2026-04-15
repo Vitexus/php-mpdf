@@ -1,0 +1,30 @@
+Source: php-mpdf
+Section: php
+Priority: optional
+Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
+Build-Depends:
+ debhelper-compat (= 13),
+ composer,
+Standards-Version: 4.7.0
+Homepage: https://mpdf.github.io
+Rules-Requires-Root: no
+Vcs-Git: https://github.com/mpdf/mpdf.git
+Vcs-Browser: https://github.com/mpdf/mpdf
+
+Package: php-mpdf
+Architecture: all
+Multi-Arch: foreign
+Depends:
+ ${misc:Depends},
+ php-common,
+ php-gd,
+ php-mbstring,
+ php-psr-log,
+ php-psr-http-message,
+Description: PHP library generating PDF files from UTF-8 encoded HTML
+ mPDF is a PHP library which generates PDF files from UTF-8 encoded HTML.
+ It is based on FPDF and HTML2FPDF, with a number of enhancements.
+ .
+ mPDF supports Unicode UTF-8 encoded HTML, CSS stylesheets, PDF/A-1b
+ and PDF/UA standards, RTL languages, and a wide range of character sets.
+ It can be used to generate PDF files server-side from dynamic HTML content.

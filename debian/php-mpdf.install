@@ -1,0 +1,4 @@
+src usr/share/php/mpdf/
+data usr/share/php/mpdf/
+ttfonts usr/share/php/mpdf/
+vendor usr/share/php/mpdf/

@@ -1,0 +1,2 @@
+Tests: pkg-php-tools-test
+Depends: @, php-cli

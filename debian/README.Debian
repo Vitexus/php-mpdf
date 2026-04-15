@@ -1,0 +1,23 @@
+php-mpdf for Debian
+-------------------
+
+This package installs the mPDF PHP library under /usr/share/php/mpdf/.
+
+A symlink is created from /usr/share/php/Mpdf to /usr/share/php/mpdf/src/
+so that standard PSR-4 autoloaders can locate the Mpdf\ namespace.
+
+Default font directory: /usr/share/php/mpdf/ttfonts/
+The font directory can be overridden via the 'fontDir' configuration key.
+
+Default temp directory: /var/cache/php-mpdf/
+The temp directory should be overridden in production via the 'tempDir'
+configuration key to a writable application-specific path.
+
+Usage example:
+
+  require '/usr/share/php/mpdf/vendor/autoload.php';
+  $mpdf = new \Mpdf\Mpdf(['tempDir' => '/tmp/mpdf']);
+  $mpdf->WriteHTML('<p>Hello World</p>');
+  $mpdf->Output();
+
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Wed, 15 Apr 2026 11:08:52 +0200
