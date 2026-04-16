@@ -22,6 +22,10 @@ Depends:
  php-mbstring,
  php-psr-log,
  php-psr-http-message,
+ php-mpdf-psr-log-aware-trait,
+ php-mpdf-psr-http-message-shim,
+ php-deepcopy,
+ php-setasign-fpdi,
 Description: PHP library generating PDF files from UTF-8 encoded HTML
  mPDF is a PHP library which generates PDF files from UTF-8 encoded HTML.
  It is based on FPDF and HTML2FPDF, with a number of enhancements.
