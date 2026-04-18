@@ -13,9 +13,17 @@ Default temp directory: /var/cache/php-mpdf/
 The temp directory should be overridden in production via the 'tempDir'
 configuration key to a writable application-specific path.
 
+Dependencies
+------------
+
+This package depends on php-setasign-fpdi for PDF import support. The
+autoloader loads setasign\Fpdi\ from /usr/share/php/setasign/Fpdi/ via
+that package's own autoloader — the bundled vendor/setasign/ directory
+is not used and not shipped.
+
 Usage example:
 
-  require '/usr/share/php/mpdf/vendor/autoload.php';
+  require '/usr/share/php/mpdf/autoload.php';
   $mpdf = new \Mpdf\Mpdf(['tempDir' => '/tmp/mpdf']);
   $mpdf->WriteHTML('<p>Hello World</p>');
   $mpdf->Output();

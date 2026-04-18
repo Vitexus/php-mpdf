@@ -11,13 +11,16 @@
 require_once '/usr/share/php/Psr/Log/autoload.php';
 require_once '/usr/share/php/Psr/Http/Message/autoload.php';
 
+// Load fpdi autoloader provided by php-setasign-fpdi
+require_once '/usr/share/php/setasign/Fpdi/autoload.php';
+
 $baseDir = '/usr/share/php/mpdf';
 
 $psr4 = [
     'Mpdf\\'                  => $baseDir . '/src',
     'Mpdf\\PsrLogAwareTrait\\' => $baseDir . '/vendor/mpdf/psr-log-aware-trait/src',
     'Mpdf\\PsrHttpMessageShim\\' => $baseDir . '/vendor/mpdf/psr-http-message-shim/src',
-    'setasign\\Fpdi\\'        => $baseDir . '/vendor/setasign/fpdi/src',
+    // setasign\Fpdi\ is provided by php-setasign-fpdi via its own autoloader above
     'DeepCopy\\'              => $baseDir . '/vendor/myclabs/deep-copy/src/DeepCopy',
     // Psr\Log and Psr\Http\Message are provided by php-psr-log / php-psr-http-message
 ];
