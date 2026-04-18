@@ -1,11 +1,12 @@
-php-mpdf (8.3.2+deb1) stable; urgency=medium
+php-mpdf (8.3.2.4) stable; urgency=medium
 
   * fix(autoload): use php-setasign-fpdi system package instead of bundled
     vendor/setasign/fpdi — load setasign\Fpdi\ via its own autoloader at
-    /usr/share/php/setasign/Fpdi/autoload.php
+    /usr/share/php/setasign/Fpdi/autoload.php; version bumped above 8.3.2.3
+    so that upgrades from older builds succeed (8.3.2+deb1 sorted lower)
   * docs: document fpdi dependency and correct usage example in README.Debian
 
- -- Vítězslav Dvořák <info@vitexsoftware.cz>  Fri, 18 Apr 2026 21:47:00 +0200
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Sat, 18 Apr 2026 23:55:00 +0200
 
 php-mpdf (8.3.2) stable; urgency=medium
 
