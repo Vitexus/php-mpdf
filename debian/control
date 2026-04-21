@@ -4,6 +4,7 @@ Priority: optional
 Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
 Build-Depends:
  debhelper-compat (= 13),
+ jq,
  composer,
  php-gd
 Standards-Version: 4.7.0
@@ -16,15 +17,17 @@ Package: php-mpdf
 Architecture: all
 Multi-Arch: foreign
 Depends:
+ composer,
  ${misc:Depends},
  php-common,
  php-gd,
  php-mbstring,
  php-psr-log,
  php-psr-http-message,
- php-mpdf-psr-log-aware-trait,
  php-mpdf-psr-http-message-shim,
- php-deepcopy,
+ php-mpdf-psr-log-aware-trait,
+ php-myclabs-deepcopy,
+ php-paragonie-random-compat,
  php-setasign-fpdi,
 Description: PHP library generating PDF files from UTF-8 encoded HTML
  mPDF is a PHP library which generates PDF files from UTF-8 encoded HTML.
