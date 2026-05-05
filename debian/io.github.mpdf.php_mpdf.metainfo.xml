@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="addon">
+  <id>io.github.mpdf.php_mpdf</id>
+  <icon type="stock">php-mpdf</icon>
+  <metadata_license>MIT</metadata_license>
+  <project_license>GPL-2.0</project_license>
+  <name>mPDF</name>
+  <summary>PHP library generating PDF files from UTF-8 encoded HTML</summary>
+  <description>
+    <p>
+      mPDF is a PHP library which generates PDF files from UTF-8 encoded HTML. It is based on FPDF and HTML2FPDF with a number of enhancements. mPDF was written by Ian Back and is released under the GNU GPL v2 licence.
+    </p>
+  </description>
+  <url type="homepage">https://mpdf.github.io</url>
+  <url type="bugtracker">https://github.com/mpdf/mpdf/issues</url>
+  <developer id="io.github.mpdf">
+    <name>mPDF contributors</name>
+  </developer>
+  <content_rating type="oars-1.1"/>
+</component>
