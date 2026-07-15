@@ -3,4 +3,4 @@ src usr/share/php/mpdf/
 data usr/share/php/mpdf/
 ttfonts usr/share/php/mpdf/
 php-mpdf.svg	usr/share/icons/hicolor/scalable/apps/
-io.github.mpdf.php_mpdf.metainfo.xml	usr/share/metainfo/
+debian/io.github.mpdf.php_mpdf.metainfo.xml	usr/share/metainfo/
