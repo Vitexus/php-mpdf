@@ -603,7 +603,6 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 
 	var $mb_enc;
 	var $originalMbEnc;
-	var $originalMbRegexEnc;
 
 	var $directionality;
 
@@ -1146,7 +1145,6 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 
 		$this->mb_enc = 'windows-1252';
 		$this->originalMbEnc = mb_internal_encoding();
-		$this->originalMbRegexEnc = mb_regex_encoding();
 
 		$this->directionality = 'ltr';
 		$this->defaultAlign = 'L';
@@ -1420,7 +1418,6 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 		} else {
 			$this->setMBencoding('UTF-8'); // sets $this->mb_enc
 		}
-		@mb_regex_encoding('UTF-8'); // required only for mb_ereg... and mb_split functions
 
 		// Adobe CJK fonts
 		$this->available_CJK_fonts = [
@@ -1570,7 +1567,6 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 	public function cleanup()
 	{
 		mb_internal_encoding($this->originalMbEnc);
-		@mb_regex_encoding($this->originalMbRegexEnc);
 
 		// this will free up the readers, based on code from Setasign's FpdiTrait::cleanUp()
 		foreach ($this->createdReaders as $id) {
@@ -6594,7 +6590,8 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 					$content[$k] = $chunk = str_replace(chr(173), '', $chunk);
 					$content[$k] = $chunk = str_replace(chr(160), chr(32), $chunk);
 				}
-				$contentWidth += $this->GetStringWidth($chunk, true, (isset($cOTLdata[$k]) ? $cOTLdata[$k] : false), $this->textvar) * Mpdf::SCALE;
+				$widthChunk = $this->aliasReplaceForWidth($chunk);
+				$contentWidth += $this->GetStringWidth($widthChunk, true, (isset($cOTLdata[$k]) ? $cOTLdata[$k] : false), $this->textvar) * Mpdf::SCALE;
 			} elseif (isset($this->objectbuffer[$k]) && $this->objectbuffer[$k]) {
 				// LIST MARKERS	// mPDF 6  Lists
 				if ($this->objectbuffer[$k]['type'] == 'image' && isset($this->objectbuffer[$k]['listmarker']) && $this->objectbuffer[$k]['listmarker'] && $this->objectbuffer[$k]['listmarkerposition'] == 'outside') {
@@ -6979,8 +6976,9 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 				}
 				// WORD SPACING
 				// mPDF 5.7.1
-				$stringWidth = $this->GetStringWidth($chunk, true, (isset($cOTLdata[$aord]) ? $cOTLdata[$aord] : false), $this->textvar);
-				$nch = mb_strlen($chunk, $this->mb_enc);
+				$widthChunk = $this->aliasReplaceForWidth($chunk);
+				$stringWidth = $this->GetStringWidth($widthChunk, true, (isset($cOTLdata[$aord]) ? $cOTLdata[$aord] : false), $this->textvar);
+				$nch = mb_strlen($widthChunk, $this->mb_enc);
 				// Use GPOS OTL
 				if (isset($this->CurrentFont['useOTL']) && $this->CurrentFont['useOTL']) {
 					if (isset($cOTLdata[$aord]['group']) && $cOTLdata[$aord]['group']) {
@@ -9707,15 +9705,6 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 		if (!function_exists('mb_substr')) {
 			throw new \Mpdf\MpdfException('mbstring extension must be loaded in order to run mPDF');
 		}
-
-		if (!function_exists('mb_regex_encoding')) {
-			$mamp = '';
-			if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-				$mamp = ' If using MAMP, there is a bug in its PHP build causing this.';
-			}
-
-			throw new \Mpdf\MpdfException('mbstring extension with mbregex support must be loaded in order to run mPDF.' . $mamp);
-		}
 	}
 
 	function _puthtmlheaders()
@@ -11655,6 +11644,7 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 
 		$decToAlpha = new Conversion\DecToAlpha();
 		$decToCjk = new Conversion\DecToCjk();
+		$decToGreek = new Conversion\DecToGreek();
 		$decToHebrew = new Conversion\DecToHebrew();
 		$decToRoman = new Conversion\DecToRoman();
 		$decToOther = new Conversion\DecToOther($this);
@@ -11676,6 +11666,10 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 		} elseif ($lowertype == 'lower-roman' || $type == 'i') {
 
 			$ppgno = $decToRoman->convert($ppgno, false);
+
+		} elseif ($lowertype == 'lower-greek') {
+
+			$ppgno = $decToGreek->convert($ppgno);
 
 		} elseif ($lowertype == 'hebrew') {
 
@@ -15684,6 +15678,11 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 				} else {
 					$blt_width = $this->GetStringWidth(str_repeat('m', strlen($maxnuma)) . $this->list_number_suffix);
 				}
+				break;
+			case 'lower-greek':
+				$decToGreek = new Conversion\DecToGreek();
+				$maxnumg = $decToGreek->convert($maxnum);
+				$blt_width = $this->GetStringWidth(str_repeat('ω', mb_strlen($maxnumg, 'UTF-8')) . $this->list_number_suffix);
 				break;
 			case 'upper-roman':
 			case 'I':
@@ -22174,16 +22173,21 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 
 					// lookahead for pagebreak
 					$pagebreaklookahead = 1;
+					$pagebreaklookaheadheight = $h;
 					while (isset($table['pagebreak-before']) && isset($table['pagebreak-before'][$i + $pagebreaklookahead]) && $table['pagebreak-before'][$i + $pagebreaklookahead] == 'avoid') {
 						// pagebreak-after is mapped to pagebreak-before on i+1 in Tags/Tr.php
 						$pagebreaklookahead++;
+						list($y2, $h2) = $this->_tableGetHeight($table, $i + $pagebreaklookahead, $j);
+						$pagebreaklookaheadheight += $h2;
+
 					}
 					// corner case: if the pagelookahead is bigger than the pagesize, we break anyway, so fill up the page
-					if ($pagebreaklookahead * $maxrowheight + $extra > $pagetrigger + 0.001) {
+					if ($pagebreaklookaheadheight + $extra > $pagetrigger + 0.001) {
 						$pagebreaklookahead = 1;
+						$pagebreaklookaheadheight = $h;
 					}
 					// if we exceed page boundaries: restart table on next page before printing the line
-					if ($j == $startcol && ((($y + $pagebreaklookahead * $maxrowheight + $extra ) > ($pagetrigger + 0.001)) || (($this->keepColumns || !$this->ColActive) && !empty($tablefooter) && ($y + $maxrowheight + $tablefooterrowheight + $extra) > $pagetrigger) && ($this->tableLevel == 1 && $i < ($numrows - $table['headernrows']))) && ($y0 > 0 || $x0 > 0) && !$this->InFooter && $this->autoPageBreak) {
+					if ($j == $startcol && ((($y + $pagebreaklookaheadheight + $extra ) > ($pagetrigger + 0.001)) || (($this->keepColumns || !$this->ColActive) && !empty($tablefooter) && ($y + $maxrowheight + $tablefooterrowheight + $extra) > $pagetrigger) && ($this->tableLevel == 1 && $i < ($numrows - $table['headernrows']))) && ($y0 > 0 || $x0 > 0) && !$this->InFooter && $this->autoPageBreak) {
 						if (!$skippage) {
 							$finalSpread = true;
 							$firstSpread = true;
@@ -27468,6 +27472,20 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 	public function _out($s)
 	{
 		$this->writer->write($s);
+	}
+
+	/**
+	 * Replace {PAGENO}, {nb}, and {nbpg} placeholders with current/estimated page numbers
+	 * for width calculation purposes. This ensures text-align right/center calculates
+	 * positions based on the actual rendered string width, not the placeholder string width.
+	 */
+	protected function aliasReplaceForWidth($text)
+	{
+		$pageNo = (string) $this->page;
+		$text = str_replace('{PAGENO}', $pageNo, $text);
+		$text = str_replace($this->aliasNbPg, $pageNo, $text);
+		$text = str_replace($this->aliasNbPgGp, $pageNo, $text);
+		return $text;
 	}
 
 	/**
