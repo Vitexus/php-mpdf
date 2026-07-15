@@ -8,3 +8,4 @@ debian/debhelper-build-stamp
 debian/files
 debian/php-mpdf/
 debian/php-mpdf.substvars
+debian/php-mpdf.debhelper.log
